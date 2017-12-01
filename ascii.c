@@ -260,7 +260,7 @@ int ASCIISendHex (byte command[],char result[])
 
 	if (res = CheckIRCode (&ir_data)) return (ASCIIErrorMessage (result,res,NULL));
 
-	swap_word (smask);
+	swap_word (&smask);
 
 	ir_data.command = HOST_SEND + rpt;
 	ir_data.address = adr;
