@@ -1,0 +1,14 @@
+[ADDRESS]
+  [NAME]Wohnzimmer[ADDRESS]0
+  [NAME]Schlafzimmer[ADDRESS]1
+  [NAME]Arbeitszimmer[ADDRESS]2
+
+[SEND-ROUTING]
+  [REM]Sony[ADDRESS]0xff
+  [REM]Yamaha[ADDRESS]0xffff
+[END]
+
+[RECV-ROUTING]
+  [REM]Tv[ADDRESS]0xffff
+  [REM]R1[ADDRESS]0xffff
+[END]

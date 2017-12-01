@@ -1,0 +1,19 @@
+SHELL = /bin/sh
+
+CC = /develop/dbox2/cdk/bin/powerpc-tuxbox-linux-gnu-gcc
+
+CFLAGS =
+CPPFLAGS = -DLINUX -DDBOX
+LDFLAGS =
+LIBS =
+
+IRSERVER_OBJS = fileio.o linuxserio.o lowlevel.o server.o errormessage.o
+
+irserver: $(IRSERVER_OBJS)
+	$(CC) $(IRSERVER_OBJS) -o irserver $(LDFLAGS)
+
+clean:
+	rm $(IRSERVER_OBJS)
+
+%.o: %.c dbstruct.h fileio.h lowlevel.h network.h remote.h serio.h
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
