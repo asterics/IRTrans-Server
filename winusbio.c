@@ -124,7 +124,7 @@ void GetComPorts (void)
 
 int OpenUSBPort (void)
 {
-	FT_STATUS stat;
+	FT_STATUS_1 stat;
 
 	stat = F_OpenEx ("IRTrans USB",FT_OPEN_BY_DESCRIPTION,&usb);
 	if (stat) stat = F_OpenEx ("FB401",FT_OPEN_BY_DESCRIPTION,&usb);
@@ -143,7 +143,7 @@ int OpenUSBPort (void)
 int WriteUSBString (byte pnt[],int len)
 {
 	DWORD num;
-	FT_STATUS stat;
+	FT_STATUS_1 stat;
 
 	stat = F_Write (usb,pnt,len,&num);
 	if (stat) return (0);
@@ -155,7 +155,7 @@ int WriteUSBString (byte pnt[],int len)
 int	ReadUSBString (byte pnt[],int len,long timeout)
 {
 	DWORD num;
-	FT_STATUS stat;
+	FT_STATUS_1 stat;
 
 	F_SetTimeouts (usb,timeout,0);
 
@@ -170,7 +170,7 @@ int	ReadUSBString (byte pnt[],int len,long timeout)
 int GetUSBAvailableEx (DEVICEINFO *dev)
 {
 	DWORD num;
-	FT_STATUS stat;
+	FT_STATUS_1 stat;
 
 	stat = F_GetQueueStatus (dev->io.usbport,&num);
 
@@ -238,7 +238,7 @@ int ReadUSBStringAvailable (DEVICEINFO *dev,byte pnt[],int len,word timeout)
 int	ReadUSBStringEx (DEVICEINFO *dev,byte pnt[],int len,word timeout)
 {
 	DWORD num;
-	FT_STATUS stat;
+	FT_STATUS_1 stat;
 
 	F_SetTimeouts (dev->io.usbport,timeout,0);
 
@@ -265,7 +265,7 @@ void FlushUSBEx (FT_HANDLE hndl)
 void WriteUSBStringEx (DEVICEINFO *dev,byte pnt[],int len)
 {
 	DWORD num;
-	FT_STATUS stat;
+	FT_STATUS_1 stat;
 
 	stat = F_Write (dev->io.usbport,pnt,len,&num);
 	if (stat == 4) {

@@ -98,6 +98,7 @@ extern int hCom;
 #include "flash.h"
 #include "xap.h"
 #include "ccf.h"
+#include "serio.h"
 
 #ifdef LINUX
 SOCKET local_socket;

@@ -3,14 +3,14 @@ SHELL = /bin/sh
 CC = gcc
 
 CFLAGS = 
-CPPFLAGS = -DLINUX -DMEDIACENTER
+CPPFLAGS = -D_WINDOWS -DWIN32 -D_BSD_SOURCE -D_CONSOLE -w
 LDFLAGS =
-LIBS =
+LIBS = -lpthread -lws2_32
 ODIR = x86
 ODIR64 = x64
 ODIRARM = arm
 
-_OBJS = fileio.o linuxserio.o lowlevel.o server.o errormessage.o flashrom.o webserver.o xap.o lanio.o ascii.o mce.o xbmc.o
+_OBJS = winusbio.o winserio.o noccf.o fileio.o linuxserio.o lowlevel.o server.o errormessage.o flashrom.o webserver.o xap.o lanio.o ascii.o mce.o xbmc.o
 OBJS = $(patsubst %,$(ODIR)/%,$(_OBJS))
 OBJS64 = $(patsubst %,$(ODIR64)/%,$(_OBJS))
 OBJSARM = $(patsubst %,$(ODIRARM)/%,$(_OBJS))
@@ -20,13 +20,13 @@ irserver: $(OBJS) $(ODIR)/ccf.o
 	$(CC) $(CFLAGS) $(OBJS) $(ODIR)/ccf.o -m32 -o irserver $(LDFLAGS)
 
 irserver_noccf: $(OBJS) $(ODIR)/noccf.o
-	$(CC) $(CFLAGS) $(OBJS) $(ODIR)/noccf.o -m32 -o irserver $(LDFLAGS)
+	$(CC) $(CFLAGS) $(OBJS) -m32 -o irserver $(LDFLAGS) $(LIBS)
 
 irserver64: $(OBJS64) $(ODIR64)/ccf.o 
 	$(CC) $(CFLAGS) -DX64 $(OBJS64) $(ODIR64)/ccf.o -m64 -o irserver64 $(LDFLAGS)
 
 irserver64_noccf: $(OBJS64) $(ODIR64)/noccf.o
-	$(CC) $(CFLAGS) -DX64 $(OBJS64) $(ODIR64)/noccf.o -m64 -o irserver64 $(LDFLAGS)
+	$(CC) $(CFLAGS) -DX64 $(OBJS64) -m64 -o irserver64 $(LDFLAGS)
 
 irserver_arm: $(OBJSARM) $(ODIRARM)/ccf.o 
 	$(CC) $(CFLAGS) $(OBJSARM) $(ODIRARM)/ccf.o -o irserver $(LDFLAGS)
@@ -57,5 +57,5 @@ $(ODIRARM)/%.o: %.c dbstruct.h fileio.h lowlevel.h network.h serio.h pictures.h 
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
 
 irclient: client.c
-	$(CC) $(CPPFLAGS) $(CFLAGS) client.c -o irclient $(LDFLAGS)
+	$(CC) $(CPPFLAGS) $(CFLAGS) client.c -o irclient $(LDFLAGS) $(LIBS)
 

@@ -3756,8 +3756,8 @@ int get_detail_deviceinfo (char serno[],char devnode[],byte if_type)
 
 #ifdef WIN32
 	FT_DEVICE ftDevice;
-	FT_STATUS ftStatus;
-	enum FT_STATS stat;
+	FT_STATUS_1 ftStatus;
+	enum FT_STATUS stat;
 
 	dev = IRDevices + device_cnt;
 	strcpy (dev->device_node,devnode);

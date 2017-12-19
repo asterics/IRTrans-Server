@@ -56,8 +56,6 @@
 
 
 
-#ifdef LINUX
-
 byte raw_repeat = 0;
 
 
@@ -67,5 +65,3 @@ int DecodeCCF (char *pcom,IRDATA *ird,int dmd)
 	return (-1);
 }
 
-
-#endif

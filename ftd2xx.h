@@ -41,8 +41,9 @@
 #ifndef FTD2XX_H
 #define FTD2XX_H
 
-#ifndef _WINDOWS
 #include <pthread.h>
+
+#ifndef _WINDOWS
 #define WINAPI
 #endif
 
@@ -75,12 +76,12 @@ typedef struct _EVENT_HANDLE{
 } EVENT_HANDLE;
 
 typedef PVOID			FT_HANDLE;
-typedef ULONG			FT_STATUS;
+typedef ULONG			FT_STATUS_1;
 
 //
 // Device status
 //
-enum {
+enum FT_STATUS {
 	FT_OK,
 	FT_INVALID_HANDLE,
 	FT_DEVICE_NOT_FOUND,
@@ -273,44 +274,44 @@ extern "C" {
 #endif
 	
 FTD2XX_API
-FT_STATUS WINAPI FT_Open(
+FT_STATUS_1 WINAPI FT_Open(
 	int deviceNumber,
 	FT_HANDLE *pHandle
 	);
 
 FTD2XX_API
-FT_STATUS WINAPI FT_OpenEx(
+FT_STATUS_1 WINAPI FT_OpenEx(
     PVOID pArg1,
     DWORD Flags,
     FT_HANDLE *pHandle
     );
 
 FTD2XX_API 
-FT_STATUS WINAPI FT_ListDevices(
+FT_STATUS_1 WINAPI FT_ListDevices(
 	PVOID pArg1,
 	PVOID pArg2,
 	DWORD Flags
 	);
 
 FTD2XX_API
-FT_STATUS FT_SetVIDPID(
+FT_STATUS_1 FT_SetVIDPID(
 	DWORD dwVID, 
 	DWORD dwPID
 	);
 	
 FTD2XX_API
-FT_STATUS FT_GetVIDPID(
+FT_STATUS_1 FT_GetVIDPID(
 	DWORD * pdwVID, 
 	DWORD * pdwPID
 	);
 
 FTD2XX_API
-FT_STATUS WINAPI FT_Close(
+FT_STATUS_1 WINAPI FT_Close(
     FT_HANDLE ftHandle
     );
 
 FTD2XX_API
-FT_STATUS WINAPI FT_Read(
+FT_STATUS_1 WINAPI FT_Read(
     FT_HANDLE ftHandle,
     LPVOID lpBuffer,
     DWORD nBufferSize,
@@ -318,7 +319,7 @@ FT_STATUS WINAPI FT_Read(
     );
 
 FTD2XX_API 
-FT_STATUS WINAPI FT_Write(
+FT_STATUS_1 WINAPI FT_Write(
     FT_HANDLE ftHandle,
     LPVOID lpBuffer,
     DWORD nBufferSize,
@@ -326,7 +327,7 @@ FT_STATUS WINAPI FT_Write(
     );
 
 FTD2XX_API 
-FT_STATUS WINAPI FT_IoCtl(
+FT_STATUS_1 WINAPI FT_IoCtl(
     FT_HANDLE ftHandle,
     DWORD dwIoControlCode,
     LPVOID lpInBuf,
@@ -338,19 +339,19 @@ FT_STATUS WINAPI FT_IoCtl(
     );
 
 FTD2XX_API
-FT_STATUS WINAPI FT_SetBaudRate(
+FT_STATUS_1 WINAPI FT_SetBaudRate(
     FT_HANDLE ftHandle,
 	ULONG BaudRate
 	);
 
 FTD2XX_API
-FT_STATUS WINAPI FT_SetDivisor(
+FT_STATUS_1 WINAPI FT_SetDivisor(
     FT_HANDLE ftHandle,
 	USHORT Divisor
 	);
 
 FTD2XX_API
-FT_STATUS WINAPI FT_SetDataCharacteristics(
+FT_STATUS_1 WINAPI FT_SetDataCharacteristics(
     FT_HANDLE ftHandle,
 	UCHAR WordLength,
 	UCHAR StopBits,
@@ -358,7 +359,7 @@ FT_STATUS WINAPI FT_SetDataCharacteristics(
 	);
 
 FTD2XX_API
-FT_STATUS WINAPI FT_SetFlowControl(
+FT_STATUS_1 WINAPI FT_SetFlowControl(
     FT_HANDLE ftHandle,
     USHORT FlowControl,
     UCHAR XonChar,
@@ -366,38 +367,38 @@ FT_STATUS WINAPI FT_SetFlowControl(
 	);
 
 FTD2XX_API
-FT_STATUS WINAPI FT_ResetDevice(
+FT_STATUS_1 WINAPI FT_ResetDevice(
     FT_HANDLE ftHandle
 	);
 
 FTD2XX_API
-FT_STATUS WINAPI FT_SetDtr(
+FT_STATUS_1 WINAPI FT_SetDtr(
     FT_HANDLE ftHandle
 	);
 
 FTD2XX_API
-FT_STATUS WINAPI FT_ClrDtr(
+FT_STATUS_1 WINAPI FT_ClrDtr(
     FT_HANDLE ftHandle
 	);
 
 FTD2XX_API
-FT_STATUS WINAPI FT_SetRts(
+FT_STATUS_1 WINAPI FT_SetRts(
     FT_HANDLE ftHandle
 	);
 
 FTD2XX_API
-FT_STATUS WINAPI FT_ClrRts(
+FT_STATUS_1 WINAPI FT_ClrRts(
     FT_HANDLE ftHandle
 	);
 
 FTD2XX_API
-FT_STATUS WINAPI FT_GetModemStatus(
+FT_STATUS_1 WINAPI FT_GetModemStatus(
     FT_HANDLE ftHandle,
 	ULONG *pModemStatus
 	);
 
 FTD2XX_API
-FT_STATUS WINAPI FT_SetChars(
+FT_STATUS_1 WINAPI FT_SetChars(
     FT_HANDLE ftHandle,
 	UCHAR EventChar,
 	UCHAR EventCharEnabled,
@@ -406,33 +407,33 @@ FT_STATUS WINAPI FT_SetChars(
     );
 
 FTD2XX_API
-FT_STATUS WINAPI FT_Purge(
+FT_STATUS_1 WINAPI FT_Purge(
     FT_HANDLE ftHandle,
 	ULONG Mask
 	);
 
 FTD2XX_API
-FT_STATUS WINAPI FT_SetTimeouts(
+FT_STATUS_1 WINAPI FT_SetTimeouts(
     FT_HANDLE ftHandle,
 	ULONG ReadTimeout,
 	ULONG WriteTimeout
 	);
 
 FTD2XX_API
-FT_STATUS WINAPI FT_GetQueueStatus(
+FT_STATUS_1 WINAPI FT_GetQueueStatus(
     FT_HANDLE ftHandle,
 	DWORD *dwRxBytes
 	);
 
 FTD2XX_API
-FT_STATUS WINAPI FT_SetEventNotification(
+FT_STATUS_1 WINAPI FT_SetEventNotification(
     FT_HANDLE ftHandle,
 	DWORD Mask,
 	PVOID Param
 	);
 
 FTD2XX_API
-FT_STATUS WINAPI FT_GetStatus(
+FT_STATUS_1 WINAPI FT_GetStatus(
     FT_HANDLE ftHandle,
     DWORD *dwRxBytes,
     DWORD *dwTxBytes,
@@ -440,49 +441,49 @@ FT_STATUS WINAPI FT_GetStatus(
 	);
 
 FTD2XX_API
-FT_STATUS WINAPI FT_SetBreakOn(
+FT_STATUS_1 WINAPI FT_SetBreakOn(
     FT_HANDLE ftHandle
     );
 
 FTD2XX_API
-FT_STATUS WINAPI FT_SetBreakOff(
+FT_STATUS_1 WINAPI FT_SetBreakOff(
     FT_HANDLE ftHandle
     );
 
 FTD2XX_API
-FT_STATUS WINAPI FT_SetWaitMask(
+FT_STATUS_1 WINAPI FT_SetWaitMask(
     FT_HANDLE ftHandle,
     DWORD Mask
     );
 
 FTD2XX_API
-FT_STATUS WINAPI FT_WaitOnMask(
+FT_STATUS_1 WINAPI FT_WaitOnMask(
     FT_HANDLE ftHandle,
     DWORD *Mask
     );
 
 FTD2XX_API
-FT_STATUS WINAPI FT_GetEventStatus(
+FT_STATUS_1 WINAPI FT_GetEventStatus(
     FT_HANDLE ftHandle,
     DWORD *dwEventDWord
     );
 
 FTD2XX_API
-FT_STATUS WINAPI FT_ReadEE(
+FT_STATUS_1 WINAPI FT_ReadEE(
     FT_HANDLE ftHandle,
 	DWORD dwWordOffset,
     LPWORD lpwValue
 	);
 
 FTD2XX_API
-FT_STATUS WINAPI FT_WriteEE(
+FT_STATUS_1 WINAPI FT_WriteEE(
     FT_HANDLE ftHandle,
 	DWORD dwWordOffset,
     WORD wValue
 	);
 
 FTD2XX_API
-FT_STATUS WINAPI FT_EraseEE(
+FT_STATUS_1 WINAPI FT_EraseEE(
     FT_HANDLE ftHandle
 	);
 	
@@ -650,13 +651,13 @@ typedef struct ft_program_data {
 
 	
 FTD2XX_API
-FT_STATUS WINAPI FT_EE_Program(
+FT_STATUS_1 WINAPI FT_EE_Program(
     FT_HANDLE ftHandle,
 	PFT_PROGRAM_DATA pData
 	);
 
 FTD2XX_API
-FT_STATUS WINAPI FT_EE_ProgramEx(
+FT_STATUS_1 WINAPI FT_EE_ProgramEx(
     FT_HANDLE ftHandle,
 	PFT_PROGRAM_DATA lpData,
 	char *Manufacturer,
@@ -666,13 +667,13 @@ FT_STATUS WINAPI FT_EE_ProgramEx(
 	);
 	
 FTD2XX_API
-FT_STATUS WINAPI FT_EE_Read(
+FT_STATUS_1 WINAPI FT_EE_Read(
     FT_HANDLE ftHandle,
 	PFT_PROGRAM_DATA pData
 	);
 
 FTD2XX_API
-FT_STATUS WINAPI FT_EE_ReadEx(
+FT_STATUS_1 WINAPI FT_EE_ReadEx(
     FT_HANDLE ftHandle,
 	PFT_PROGRAM_DATA lpData,
 	char *Manufacturer,
@@ -682,20 +683,20 @@ FT_STATUS WINAPI FT_EE_ReadEx(
 	);
 	
 FTD2XX_API
-FT_STATUS WINAPI FT_EE_UASize(
+FT_STATUS_1 WINAPI FT_EE_UASize(
     FT_HANDLE ftHandle,
 	LPDWORD lpdwSize
 	);
 
 FTD2XX_API
-FT_STATUS WINAPI FT_EE_UAWrite(
+FT_STATUS_1 WINAPI FT_EE_UAWrite(
     FT_HANDLE ftHandle,
 	PUCHAR pucData,
 	DWORD dwDataLen
 	);
 
 FTD2XX_API
-FT_STATUS WINAPI FT_EE_UARead(
+FT_STATUS_1 WINAPI FT_EE_UARead(
     FT_HANDLE ftHandle,
 	PUCHAR pucData,
 	DWORD dwDataLen,
@@ -703,39 +704,39 @@ FT_STATUS WINAPI FT_EE_UARead(
 	);
 
 FTD2XX_API
-FT_STATUS WINAPI FT_SetLatencyTimer(
+FT_STATUS_1 WINAPI FT_SetLatencyTimer(
     FT_HANDLE ftHandle,
     UCHAR ucLatency
     );
 
 FTD2XX_API
-FT_STATUS WINAPI FT_GetLatencyTimer(
+FT_STATUS_1 WINAPI FT_GetLatencyTimer(
     FT_HANDLE ftHandle,
     PUCHAR pucLatency
     );
 
 FTD2XX_API
-FT_STATUS WINAPI FT_SetBitMode(
+FT_STATUS_1 WINAPI FT_SetBitMode(
     FT_HANDLE ftHandle,
     UCHAR ucMask,
 	UCHAR ucEnable
     );
 
 FTD2XX_API
-FT_STATUS WINAPI FT_GetBitMode(
+FT_STATUS_1 WINAPI FT_GetBitMode(
     FT_HANDLE ftHandle,
     PUCHAR pucMode
     );
 
 FTD2XX_API
-FT_STATUS WINAPI FT_SetUSBParameters(
+FT_STATUS_1 WINAPI FT_SetUSBParameters(
     FT_HANDLE ftHandle,
     ULONG ulInTransferSize,
     ULONG ulOutTransferSize
     );
 
 FTD2XX_API
-FT_STATUS WINAPI FT_GetDeviceInfo(
+FT_STATUS_1 WINAPI FT_GetDeviceInfo(
     FT_HANDLE ftHandle,
     FT_DEVICE *lpftDevice,
 	LPDWORD lpdwID,
@@ -745,29 +746,29 @@ FT_STATUS WINAPI FT_GetDeviceInfo(
     );
 	
 FTD2XX_API
-FT_STATUS WINAPI FT_GetDeviceLocId(
+FT_STATUS_1 WINAPI FT_GetDeviceLocId(
    FT_HANDLE ftHandle,
    LPDWORD lpdwLocId
    );
 
 FTD2XX_API
-FT_STATUS WINAPI FT_StopInTask(
+FT_STATUS_1 WINAPI FT_StopInTask(
     FT_HANDLE ftHandle
     );
 
 FTD2XX_API
-FT_STATUS WINAPI FT_RestartInTask(
+FT_STATUS_1 WINAPI FT_RestartInTask(
     FT_HANDLE ftHandle
     );
 
 FTD2XX_API
-FT_STATUS WINAPI FT_SetResetPipeRetryCount(
+FT_STATUS_1 WINAPI FT_SetResetPipeRetryCount(
     FT_HANDLE ftHandle,
 	DWORD dwCount
     );
 
 FTD2XX_API
-FT_STATUS WINAPI FT_ResetPort(
+FT_STATUS_1 WINAPI FT_ResetPort(
     FT_HANDLE ftHandle
     );
 
@@ -985,18 +986,18 @@ enum {
 };
 
 FTD2XX_API
-FT_STATUS WINAPI FT_CreateDeviceInfoList(
+FT_STATUS_1 WINAPI FT_CreateDeviceInfoList(
 	LPDWORD lpdwNumDevs
 	);
 
 FTD2XX_API
-FT_STATUS WINAPI FT_GetDeviceInfoList(
+FT_STATUS_1 WINAPI FT_GetDeviceInfoList(
 	FT_DEVICE_LIST_INFO_NODE *pDest,
 	LPDWORD lpdwNumDevs
 	);
 
 FTD2XX_API
-FT_STATUS WINAPI FT_GetDeviceInfoDetail(
+FT_STATUS_1 WINAPI FT_GetDeviceInfoDetail(
 	DWORD dwIndex,
 	LPDWORD lpdwFlags,
 	LPDWORD lpdwType,
@@ -1013,13 +1014,13 @@ FT_STATUS WINAPI FT_GetDeviceInfoDetail(
 //
 
 FTD2XX_API
-FT_STATUS WINAPI FT_GetDriverVersion(
+FT_STATUS_1 WINAPI FT_GetDriverVersion(
     FT_HANDLE ftHandle,
 	LPDWORD	lpdwVersion
 	);
 
 FTD2XX_API
-FT_STATUS WINAPI FT_GetLibraryVersion(
+FT_STATUS_1 WINAPI FT_GetLibraryVersion(
 	LPDWORD	lpdwVersion
 	);		
 
